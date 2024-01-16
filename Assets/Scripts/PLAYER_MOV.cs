@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PLAYER_MOV : MonoBehaviour
 {
@@ -8,17 +9,24 @@ public class PLAYER_MOV : MonoBehaviour
 
     public float speed;
     private float Move;
-    public float jumpHeight;
-    private bool isJumping = false; 
-
-
-
+    public float jump;
     public Rigidbody2D rig;
+    public bool isGrounded;
+    public bool isJumping;
+    public Animation animator;
+
+    //[SerializeField] private LayerMask groundLayerMask; //está expuesta solo en el inspector. Es nuestro suelo.
+
+
+    
 
     private void Start()
     {
-        
+        rig = GetComponent<Rigidbody2D>();  
     }
+
+
+   
 
     private void Awake()
     {
@@ -28,23 +36,42 @@ public class PLAYER_MOV : MonoBehaviour
     private void Update()
     {
         Move = Input.GetAxis("Horizontal");
-        
+
 
         rig.velocity = new Vector2(speed * Move, rig.velocity.y);
-        
-        if(Input.GetKeyDown(KeyCode.Escape) && !isJumping)
+
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
-            rig.AddForce(Vector2.up * jumpHeight); // you need a reference to the RigidBody2D component
+            rig.velocity += Vector2.up * jump;
             isJumping = true;
+            Debug.Log("salto");
         }
+
+        
+
+        
     }
-    /*private void OnCollisionEnter2D(Collision col)
+
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (col.gameObject.tag == "ground") // GameObject is a type, gameObject is the property
+       
+        if (other.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
+
+           
+        }
+    }
+
+   /* private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isJumping = true;
         }
     }*/
+
+
 
 
 }
