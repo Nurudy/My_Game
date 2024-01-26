@@ -7,6 +7,7 @@ TagManager:
   - floor
   - Ground
   - player
+  - cat
   layers:
   - Default
   - TransparentFX
