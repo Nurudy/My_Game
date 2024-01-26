@@ -29,10 +29,10 @@ public class PLAYER_MOV : MonoBehaviour
 
    
 
-    private void Awake()
+    /*private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
-    }
+    }*/
 
     private void Update()
     {

@@ -18,6 +18,7 @@ public class CATS : MonoBehaviour
     public float speedFollow;
     public float catJump;
     public LayerMask ground;
+    public bool isJumping;
 
     private Rigidbody2D cat;
 
@@ -38,17 +39,30 @@ public class CATS : MonoBehaviour
         }
 
         //the cat jumping
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
-            Jumping();
+            cat.velocity += Vector2.up * catJump;
+            isJumping = true;
+            Debug.Log("Gatosalto");
         }
 
 
     }
 
-    void Jumping()
+    /*void Jumping()
     {
-        cat.velocity = new Vector2(cat.velocity.x, catJump * Time.deltaTime);
+        cat.velocity = new Vector2(cat.velocity.y, catJump * Time.deltaTime);
+    }*/
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+
+        }
+
     }
 
     /*private bool ItsGround()
