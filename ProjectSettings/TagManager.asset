@@ -8,20 +8,23 @@ TagManager:
   - Ground
   - player
   - cat
+  - background
+  - RATENEMY
+  - potion
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - background
   - Water
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - TILEMAP
+  - POTION
+  - RAT
+  - CAT
+  - PLAYER
   - 
   - 
   - 
@@ -45,9 +48,18 @@ TagManager:
   - name: background
     uniqueID: 3661070707
     locked: 0
+  - name: tilemap
+    uniqueID: 1860489397
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: player
     uniqueID: 234921059
+    locked: 0
+  - name: cat
+    uniqueID: 1254811071
+    locked: 0
+  - name: potion
+    uniqueID: 616154819
     locked: 0

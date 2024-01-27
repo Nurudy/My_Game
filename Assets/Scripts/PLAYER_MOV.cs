@@ -15,24 +15,16 @@ public class PLAYER_MOV : MonoBehaviour
     public bool isJumping;
     public Animator anim;
 
-    //[SerializeField] private LayerMask groundLayerMask; //está expuesta solo en el inspector. Es nuestro suelo.
-
-
-    
+    public int maxHealth = 100;
+    private int currentHealth; 
 
     private void Start()
     {
         anim = GetComponent<Animator>();
-        rig = GetComponent<Rigidbody2D>();  
-    }
-
-
-   
-
-    /*private void Awake()
-    {
         rig = GetComponent<Rigidbody2D>();
-    }*/
+
+        currentHealth = maxHealth; //empezamos el juego con la vida al maximo
+    }
 
     private void Update()
     {
@@ -60,10 +52,25 @@ public class PLAYER_MOV : MonoBehaviour
         {
             anim.SetBool("isWalking", true);
         }
-
         
+    }
 
-        
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage; //restamos el daño recibido a la salud actual
+
+        Debug.Log("Healt:" + currentHealth);
+
+        if (currentHealth <= 0) //verificamos si la salud ha llegado a cero o menos. (Jugador muerto)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        //podemos poner la logica de reiniciar el juego o llevarnos al menu pausa. Loquesea. O mas cosas, yoquese
+        gameObject.SetActive(false);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -77,13 +84,7 @@ public class PLAYER_MOV : MonoBehaviour
         
     }
 
-   /* private void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isJumping = true;
-        }
-    }*/
+  
 
 
 

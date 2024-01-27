@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class CATS : MonoBehaviour
 {
-    /* [SerializeField] private GameObject player;
-     [SerializeField] private float speed = 20f;
-     public GameObject cat;
-     private void Update()
-     {
-         Vector3 Playerpos = new Vector3(player.transform.position.x - 2f, player.transform.position.y,player.transform.position.z);
-         transform.position = Vector2.MoveTowards(cat.transform.position, Playerpos, speed * Time.deltaTime);
-     }*/
+  
 
     public Transform player;
     public float distanceFollow;
@@ -49,10 +42,7 @@ public class CATS : MonoBehaviour
 
     }
 
-    /*void Jumping()
-    {
-        cat.velocity = new Vector2(cat.velocity.y, catJump * Time.deltaTime);
-    }*/
+    
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -65,9 +55,5 @@ public class CATS : MonoBehaviour
 
     }
 
-    /*private bool ItsGround()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, ground);
-        return hit.collider != null;
-    }*/
+    
 }
