@@ -20,6 +20,11 @@ TagManager:
   - UI
   - 
   - 
+  - 
+  - 
+  - 
+  - 
+  - MIDDLE
   - TILEMAP
   - POTION
   - RAT
@@ -39,17 +44,15 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
   m_SortingLayers:
+  - name: tilemap
+    uniqueID: 1860489397
+    locked: 0
   - name: background
     uniqueID: 3661070707
     locked: 0
-  - name: tilemap
-    uniqueID: 1860489397
+  - name: MIDDLE
+    uniqueID: 3412444299
     locked: 0
   - name: Default
     uniqueID: 0

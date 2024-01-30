@@ -12,17 +12,21 @@ public class CATS : MonoBehaviour
     public float catJump;
     public LayerMask ground;
     public bool isJumping;
+   
 
     private Rigidbody2D cat;
 
     private void Start()
     {
         cat = GetComponent<Rigidbody2D>();
+      
     }
 
     private void Update()
     {
         Vector2 Direction = player.position - transform.position;
+        float Distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.y),
+            new Vector2(player.transform.position.x, player.transform.position.y));
 
         //the cat horizontal movement
 
@@ -38,6 +42,8 @@ public class CATS : MonoBehaviour
             isJumping = true;
             Debug.Log("Gatosalto");
         }
+
+
 
 
     }

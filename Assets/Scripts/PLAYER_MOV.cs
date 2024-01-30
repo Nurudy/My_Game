@@ -16,7 +16,10 @@ public class PLAYER_MOV : MonoBehaviour
     public Animator anim;
 
     public int maxHealth = 100;
-    private int currentHealth; 
+    private int currentHealth;
+
+    public Transform shootPoint;
+    public GameObject bulletPrefab;
 
     private void Start()
     {
@@ -52,6 +55,12 @@ public class PLAYER_MOV : MonoBehaviour
         {
             anim.SetBool("isWalking", true);
         }
+         
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            Instantiate(bulletPrefab, shootPoint.position, transform.rotation);
+        }
+        
         
     }
 
