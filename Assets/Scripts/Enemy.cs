@@ -9,25 +9,17 @@ public class Enemy : MonoBehaviour
     public float followTime = 3.0f;
     public float stopTime = 2.0f;
     private bool following = false;
+    public PLAYER_MOV playerHealth; //esto es para añadir el script del jugador
+
 
     public int damage = 10;
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("player"))
-        {
-            //Le hacemos daño al jugador
-            PLAYER_MOV health = other.GetComponent<PLAYER_MOV>();
-            if (health != null)
-            {
-                health.TakeDamage(damage);
-            }
-        }
-    }
+    public int ratHealth = 30;
+    public int currentRatHealth;
 
     public void Start()
     {
         StartBucle();
+        currentRatHealth = ratHealth;
     }
 
     void StartBucle()
@@ -60,6 +52,23 @@ public class Enemy : MonoBehaviour
             direction.y = 0; //de esta forma mantienen la misma altura
 
             transform.Translate(direction.normalized * speed * Time.deltaTime);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentRatHealth -= damage;
+        if (currentRatHealth < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "player")
+        {
+            playerHealth.TakeDamage(damage);
         }
     }
 

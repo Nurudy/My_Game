@@ -8,10 +8,14 @@ public class CATS : MonoBehaviour
 
     public Transform player;
     public float distanceFollow;
+   public float distanceRespawn;
     public float speedFollow;
     public float catJump;
     public LayerMask ground;
     public bool isJumping;
+
+   
+   
    
 
     private Rigidbody2D cat;
@@ -25,8 +29,8 @@ public class CATS : MonoBehaviour
     private void Update()
     {
         Vector2 Direction = player.position - transform.position;
-        float Distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.y),
-            new Vector2(player.transform.position.x, player.transform.position.y));
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+
 
         //the cat horizontal movement
 
@@ -43,9 +47,18 @@ public class CATS : MonoBehaviour
             Debug.Log("Gatosalto");
         }
 
+        if(distance > 5f)
+        {
+            Respawn();
+        }
+        
 
 
+    }
 
+    void Respawn()
+    {
+        transform.position = player.position;
     }
 
     

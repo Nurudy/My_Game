@@ -14,6 +14,9 @@ public class PLAYER_MOV : MonoBehaviour
     public bool isGrounded;
     public bool isJumping;
     public Animator anim;
+  
+   
+    
 
     public int maxHealth = 100;
     private int currentHealth;
@@ -70,6 +73,11 @@ public class PLAYER_MOV : MonoBehaviour
 
         Debug.Log("Healt:" + currentHealth);
 
+        if (currentHealth <=0)
+        {
+            Destroy(gameObject);
+        }
+
         if (currentHealth <= 0) //verificamos si la salud ha llegado a cero o menos. (Jugador muerto)
         {
             Die();
@@ -84,7 +92,9 @@ public class PLAYER_MOV : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-       
+
+        Debug.Log(other.gameObject.name);
+
         if (other.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
@@ -93,7 +103,7 @@ public class PLAYER_MOV : MonoBehaviour
         
     }
 
-  
+    
 
 
 

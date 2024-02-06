@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed; 
     private Rigidbody2D rb;
+    
 
     private void Start()
     {
@@ -14,14 +15,26 @@ public class Bullet : MonoBehaviour
 
     }
 
+     private void OnCollisionEnter2D(Collision2D collision)
+     {
+         if(collision.collider.gameObject.tag == "RATENEMY")
+         {
+             collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
+            Destroy(gameObject);
+
+         }
+     }
+
     private void Awake()
     {
         StartCoroutine(Destroy());
     }
 
     IEnumerator Destroy()
-    {
-        yield return new WaitForSeconds(1);
-        Object.Destroy(this.gameObject);
-    }
+     {
+         yield return new WaitForSeconds(1);
+         Object.Destroy(this.gameObject);
+     }
+
+
 }
