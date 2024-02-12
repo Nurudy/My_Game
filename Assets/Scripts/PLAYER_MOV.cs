@@ -63,9 +63,13 @@ public class PLAYER_MOV : MonoBehaviour
         {
             Instantiate(bulletPrefab, shootPoint.position, transform.rotation);
         }
-        
-        
+
     }
+
+    /*private void FixedUpdate()
+    {
+        
+    }*/
 
     public void TakeDamage(int damage)
     {

@@ -6815,7 +6815,7 @@ GameObject:
   - component: {fileID: 1312660548}
   m_Layer: 15
   m_Name: rata
-  m_TagString: RATENEMY
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7666,7 +7666,7 @@ GameObject:
   - component: {fileID: 1826071253}
   m_Layer: 0
   m_Name: BichoFeo
-  m_TagString: Untagged
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7823,8 +7823,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303d8c0ccaea71346942050fc8bcc77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2654813975015423201, guid: ea33b060135bd584ea87579d8566d940, type: 3}
+  bullet: {fileID: 418919070820392259, guid: e642bf2d8b0bb914e96b26317af2fd6c, type: 3}
   bulletPos: {fileID: 129550149}
+  warmHealth: 40
+  currentWarmHealth: 0
 --- !u!1 &1924933302
 GameObject:
   m_ObjectHideFlags: 0

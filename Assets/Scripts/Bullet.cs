@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
 
      private void OnCollisionEnter2D(Collision2D collision)
      {
-         if(collision.collider.gameObject.tag == "RATENEMY")
+         if(collision.collider.gameObject.tag == "ENEMY")
          {
              collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
             Destroy(gameObject);

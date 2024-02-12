@@ -6,22 +6,46 @@ public class Enemy2 : MonoBehaviour
 {
     public GameObject bullet;
     public Transform bulletPos;
+    private GameObject player;
+
+    public int warmHealth = 40;
+    public int currentWarmHealth;
 
     private float timer;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("player");
+        currentWarmHealth = warmHealth;
+    }
+
     private void Update()
     {
-        timer += Time.deltaTime;
+        float distance = Vector2.Distance(transform.position, player.transform.position);
 
-        if(timer > 1)
+        if (distance < 15) //si la distancia es menos que X, el bicho comenzara a disparar balas cada segundo
         {
-            timer = 0;
-            Shoot();
+            timer += Time.deltaTime;
+
+            if (timer > 1)
+            {
+                timer = 0;
+                Shoot();
+            }
         }
 
         void Shoot()
         {
             Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentWarmHealth -= damage;
+        if (currentWarmHealth < 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
