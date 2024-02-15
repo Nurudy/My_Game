@@ -8,11 +8,12 @@ public class PLAYER_MOV : MonoBehaviour
 
 
     public float speed;
-    private float Move;
+    [SerializeField]private float horizontalInput;
     public float jump;
     public Rigidbody2D rig;
     public bool isGrounded;
     public bool isJumping;
+    public bool isWalking;
     public Animator anim;
   
    
@@ -34,42 +35,35 @@ public class PLAYER_MOV : MonoBehaviour
 
     private void Update()
     {
-        Move = Input.GetAxis("Horizontal");
-
-
-        rig.velocity = new Vector2(speed * Move, rig.velocity.y);
+        horizontalInput = Input.GetAxis("Horizontal");
+        isWalking = horizontalInput != 0;
 
         if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
             rig.velocity += Vector2.up * jump;
             isJumping = true;
             Debug.Log("salto");
-            anim.SetBool("isJumping", true);
-        }
-        else
-        {
-            anim.SetBool("isJumping", false);
+            
         }
 
-        if (Move == 0)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            anim.SetBool("isWalking", false);
-        } else
-        {
-            anim.SetBool("isWalking", true);
+            Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         }
-         
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            Instantiate(bulletPrefab, shootPoint.position, transform.rotation);
-        }
-
+        
+       
     }
 
-    /*private void FixedUpdate()
+    private void FixedUpdate()
     {
-        
-    }*/
+        rig.velocity = new Vector2(speed * horizontalInput, rig.velocity.y);
+    }
+
+    private void LateUpdate()
+    {
+        anim.SetBool("isJumping", isJumping);
+        anim.SetBool("isWalking", isWalking);
+    }
 
     public void TakeDamage(int damage)
     {

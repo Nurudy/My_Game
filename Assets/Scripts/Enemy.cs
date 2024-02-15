@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
 
             transform.Translate(direction.normalized * speed * Time.deltaTime);
         }
+
+        
     }
 
     public void TakeDamage(int damage)
