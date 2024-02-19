@@ -15,6 +15,7 @@ TagManager:
   - ENEMY
   - RAT
   - WARM
+  - BUTTON
   layers:
   - Default
   - TransparentFX
@@ -36,7 +37,7 @@ TagManager:
   - PLAYER
   - MISIL
   - MOCO
-  - 
+  - BUTTON
   - 
   - 
   - 
