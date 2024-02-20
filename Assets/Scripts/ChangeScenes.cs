@@ -5,20 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScenes : MonoBehaviour
 {
-    /*public void PlayGame()
-    {
-        SceneManager.LoadScene("GAME");
-    }*/
+   
+
 
     public enum Scene
     {
         GAME,
         MAINMENU,
         CONTROLS,
-        SETTINGS
+        SETTINGS,
+        LEVELROOM
     }
 
-    public void Load(Scene scene)
+    public static void Load(Scene scene)
     {
         SceneManager.LoadScene(scene.ToString());
     }

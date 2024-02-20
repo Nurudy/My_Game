@@ -318,9 +318,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 234554210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 740055b8539def54cb19869b8c42a781, type: 3}
+  m_Script: {fileID: 11500000, guid: c140c5ab14426784a8d218e49a82b9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomButton: {fileID: 1908181629}
+  controlsButton: {fileID: 1830351075}
+  settingsButton: {fileID: 876917860}
 --- !u!1 &395251515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,19 +1319,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1908181630}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 234554215}
-        m_TargetAssemblyTypeName: ChangeScenes, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1908181630
 MonoBehaviour:
   m_ObjectHideFlags: 0
