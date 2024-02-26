@@ -45,11 +45,13 @@ public class PauseUI : MonoBehaviour
   
     public void RoomButton()
     {
+        Time.timeScale = 1f;
         ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM);
     }
 
     public void SettingsButton()
     {
+        Time.timeScale = 1f;
         ChangeScenes.Load(ChangeScenes.Scene.SETTINGS);
     }
 

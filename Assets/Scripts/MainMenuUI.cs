@@ -9,12 +9,14 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button roomButton;
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button settingsButton;
+    [SerializeField] private Button quitButton;
 
     private void Start()
     {
         roomButton.onClick.AddListener(RoomButton);
         controlsButton.onClick.AddListener(ControlsButton);
         settingsButton.onClick.AddListener(SettingsButton);
+        quitButton.onClick.AddListener(Application.Quit);
     }
 
     public void RoomButton()
@@ -31,4 +33,6 @@ public class MainMenuUI : MonoBehaviour
     {
         ChangeScenes.Load(ChangeScenes.Scene.SETTINGS);
     }
+
+    
 }

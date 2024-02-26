@@ -7,7 +7,7 @@ public class PLAYER_MOV : MonoBehaviour
 {
 
 
-    public float speed;
+    public float speed;    //PONER PRIVADAS LAS NO NECESARIAMENTE PÚBLICAS (PISTA: LA GRAN MAYORÍA =D ) 
     [SerializeField]private float horizontalInput;
     public float jump;
     public Rigidbody2D rig;
@@ -15,6 +15,7 @@ public class PLAYER_MOV : MonoBehaviour
     public bool isJumping;
     public bool isWalking;
     public Animator anim;
+    private bool firstTime = true;
 
     public Vector2 startPos;
 
@@ -61,15 +62,12 @@ public class PLAYER_MOV : MonoBehaviour
             Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         }
 
-       if(transform.position.y <= deathHight)
+        if (firstTime && transform.position.y <= deathHight)
         {
             Die();
+            firstTime = false;
         }
 
-
-
-        
-       
     }
 
     private void FixedUpdate()
@@ -104,15 +102,22 @@ public class PLAYER_MOV : MonoBehaviour
         //podemos poner la logica de reiniciar el juego o llevarnos al menu pausa. Loquesea. O mas cosas, yoquese
         StartCoroutine(Respawn(1f));
         particleDeath.Play();
+     
+
     }
 
     
     
     IEnumerator Respawn(float duration)
     {
+
         yield return new WaitForSeconds(duration);
         transform.position = startPos;
         currentHealth = maxHealth;
+        firstTime = true;
+        rig.velocity = Vector2.zero;
+
+
     }
 
     /*public void UpdateCheckpoint(Vector2 pos)

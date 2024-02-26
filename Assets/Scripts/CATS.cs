@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CATS : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class CATS : MonoBehaviour
     public float catJump;
     public LayerMask ground;
     public bool isJumping;
+    public bool isWalking;
+    public Animator anim;
 
-   
-   
-   
+
+
+
 
     private Rigidbody2D cat;
 
@@ -56,9 +59,15 @@ public class CATS : MonoBehaviour
 
     }
 
+    private void LateUpdate()
+    {
+        anim.SetBool("iswalking", isWalking);
+    }
+
     void Respawn()
     {
         transform.position = player.position;
+        cat.velocity = Vector2.zero;
     }
 
     
