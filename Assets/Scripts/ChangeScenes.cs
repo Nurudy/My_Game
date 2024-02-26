@@ -14,7 +14,9 @@ public class ChangeScenes : MonoBehaviour
         MAINMENU,
         CONTROLS,
         SETTINGS,
-        LEVELROOM
+        LEVELROOM,
+        LOADING,
+        Video
     }
 
     public static void Load(Scene scene)

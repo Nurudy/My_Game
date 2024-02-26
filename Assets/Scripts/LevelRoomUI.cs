@@ -16,6 +16,6 @@ public class LevelRoomUI : MonoBehaviour
 
     public void OneButton()
     {
-        ChangeScenes.Load(ChangeScenes.Scene.GAME);
+        ChangeScenes.Load(ChangeScenes.Scene.Video);
     }
 }

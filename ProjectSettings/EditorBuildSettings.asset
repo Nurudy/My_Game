@@ -15,9 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/CONTROLS.unity
     guid: 804b27d730334884b8e595f98c75f24e
   - enabled: 1
+    path: Assets/Scenes/LOADING.unity
+    guid: 3df1c83920136d6418a728c8a0804548
+  - enabled: 1
     path: Assets/Scenes/SETTINGS.unity
     guid: a1f4895a324c6bb449e576817b24b158
   - enabled: 1
     path: Assets/Scenes/LEVELROOM.unity
     guid: 30f091b2a58fc47458b5816bc1632f79
+  - enabled: 1
+    path: Assets/Scenes/Video.unity
+    guid: 80a1038d37f799c45b7f7800db95aae9
   m_configObjects: {}
