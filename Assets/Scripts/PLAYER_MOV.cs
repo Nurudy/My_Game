@@ -15,8 +15,11 @@ public class PLAYER_MOV : MonoBehaviour
     public bool isJumping;
     public bool isWalking;
     public Animator anim;
-  
-   
+
+    public Vector2 startPos;
+
+    public float deathHight = -70f; //si baja estos metros pupu morirá
+    
     
 
     public int maxHealth = 100;
@@ -24,13 +27,20 @@ public class PLAYER_MOV : MonoBehaviour
 
     public Transform shootPoint;
     public GameObject bulletPrefab;
+    public ParticleSystem particleDeath;
+
+    //private GAMEMANAGER gm;
 
     private void Start()
     {
+        startPos = transform.position;
         anim = GetComponent<Animator>();
         rig = GetComponent<Rigidbody2D>();
-
+        //gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GAMEMANAGER>();
+        //transform.position = gm.lastChekPoint;
         currentHealth = maxHealth; //empezamos el juego con la vida al maximo
+
+
     }
 
     private void Update()
@@ -50,6 +60,14 @@ public class PLAYER_MOV : MonoBehaviour
         {
             Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         }
+
+       if(transform.position.y <= deathHight)
+        {
+            Die();
+        }
+
+
+
         
        
     }
@@ -73,21 +91,34 @@ public class PLAYER_MOV : MonoBehaviour
 
         if (currentHealth <=0)
         {
-            Destroy(gameObject);
+            Die();
+
+            Debug.Log("morido");
         }
 
-        if (currentHealth <= 0) //verificamos si la salud ha llegado a cero o menos. (Jugador muerto)
-        {
-            Die();
-        }
+       
     }
 
     private void Die()
     {
         //podemos poner la logica de reiniciar el juego o llevarnos al menu pausa. Loquesea. O mas cosas, yoquese
-        gameObject.SetActive(false);
+        StartCoroutine(Respawn(1f));
+        particleDeath.Play();
     }
 
+    
+    
+    IEnumerator Respawn(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        transform.position = startPos;
+        currentHealth = maxHealth;
+    }
+
+    /*public void UpdateCheckpoint(Vector2 pos)
+    {
+        startPos = pos;
+    }*/
     void OnCollisionEnter2D(Collision2D other)
     {
 

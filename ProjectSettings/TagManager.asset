@@ -16,6 +16,7 @@ TagManager:
   - RAT
   - WARM
   - BUTTON
+  - GM
   layers:
   - Default
   - TransparentFX
