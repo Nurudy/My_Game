@@ -42,16 +42,16 @@ public class GAMEMANAGER : MonoBehaviour
         }
     }*/
 
-    public VideoPlayer player;
-    public Animation message;
-    public float messageDelay = 2;
-    private bool showMessage = false;
+    [SerializeField] VideoPlayer player;
+    /*public Animation message;
+    public float messageDelay = 2;*/
+    
 
 
 
     private void Start()
     {
-        player = GetComponent<VideoPlayer>();
+        //player = GetComponent<VideoPlayer>();
         player.loopPointReached += OnVideoEnded;
     }
 
@@ -63,18 +63,12 @@ public class GAMEMANAGER : MonoBehaviour
             ChangeScenes.Load(ChangeScenes.Scene.LOADING);
         }
 
-        if (!showMessage && player.time >= messageDelay)
-        {
-            message.Play();
-            showMessage = true;
-        }
+       
     }
 
     private void OnVideoEnded(VideoPlayer player)
     {
-        message.Stop();
-        showMessage = true;
-
+        Debug.Log("Video Finished");
         ChangeScenes.Load(ChangeScenes.Scene.LOADING);
     }
 
