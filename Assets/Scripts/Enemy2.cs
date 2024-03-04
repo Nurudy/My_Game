@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class Enemy2 : MonoBehaviour
 {
-    public GameObject bullet;
-    public Transform bulletPos;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform bulletPos;
     private GameObject player;
 
-    public int warmHealth = 40;
-    public int currentWarmHealth;
+    private int wormHealth = 30;
+    private int currentWormHealth;
 
     private float timer;
 
-    private void Start()
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioSource audioSource;
+    private void Start() //the warm searh the player
     {
         player = GameObject.FindGameObjectWithTag("player");
-        currentWarmHealth = warmHealth;
+        currentWormHealth = wormHealth;
     }
 
     private void Update()
     {
         float distance = Vector2.Distance(transform.position, player.transform.position);
 
-        if (distance < 15) //si la distancia es menos que X, el bicho comenzara a disparar balas cada segundo
+        if (distance < 15) //"If the distance is less than X, the creature will start shooting bullets every second."
         {
             timer += Time.deltaTime;
 
-            if (timer > 1.5f)
+            if (timer > 1.5f) //the worm shoot every 1.5 seconds
             {
                 timer = 0;
                 Shoot();
@@ -37,13 +39,14 @@ public class Enemy2 : MonoBehaviour
         void Shoot()
         {
             Instantiate(bullet, bulletPos.position, Quaternion.identity);
+            audioSource.PlayOneShot(shootSound);
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) //as the rat enemy. The worm will destroy.
     {
-        currentWarmHealth -= damage;
-        if (currentWarmHealth < 0)
+        currentWormHealth -= damage;
+        if (currentWormHealth < 0)
         {
             Destroy(gameObject);
         }

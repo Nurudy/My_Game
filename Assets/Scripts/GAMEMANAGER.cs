@@ -8,75 +8,23 @@ using UnityEngine.Video;
 
 public class GAMEMANAGER : MonoBehaviour
 {
-    //respawn
-    //escenas
-    //objetos
 
-    //PLAYER_MOV checkPointController;
-
-    /*private static GAMEMANAGER instance;
-    public Vector2 lastChekPoint;
-
-    private void Awake()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if(instance == null)
+        if (collision.gameObject.CompareTag("player")) //As the player progresses through levels, the progress is saved.
         {
-            instance = this;
-            DontDestroyOnLoad(instance);
+            ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM);
+            
+            PlayerPrefs.SetInt("Level1Completed", 1); // "one" is completed.
+            PlayerPrefs.Save();
+
+            
         }
-        else
-        {
-            Destroy(gameObject);
-        }*/
-
-    //checkPointController = GameObject.FindGameObjectWithTag("player").GetComponent<PLAYER_MOV>(); //esto es para poder
-    //acceder a la componente del gameobject del jugador. Asi el checkpoint lo reconoce(?
-
-
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("player"))
-        {
-            checkPointController.UpdateCheckpoint(transform.position);
-        }
-    }*/
-
-    [SerializeField] VideoPlayer player;
-    /*public Animation message;
-    public float messageDelay = 2;*/
+    }
     
 
 
-
-    private void Start()
-    {
-        //player = GetComponent<VideoPlayer>();
-        player.loopPointReached += OnVideoEnded;
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            ChangeScenes.Load(ChangeScenes.Scene.LOADING);
-        }
-
-       
-    }
-
-    private void OnVideoEnded(VideoPlayer player)
-    {
-        Debug.Log("Video Finished");
-        ChangeScenes.Load(ChangeScenes.Scene.LOADING);
-    }
-
-
-
-
-
-    }
+}
 
 
 

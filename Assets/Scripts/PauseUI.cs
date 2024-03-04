@@ -11,38 +11,46 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Button resumeButton;
 
     public GameObject resumePanel;
-    public bool pause = false;
+    private bool pause = false; //with that line, the game won't start in pause
+
+    
+
+    
 
 
     private void Start()
     {
+
+        resumePanel.SetActive(false);
         roomButton.onClick.AddListener(RoomButton);
         resumeButton.onClick.AddListener(ResumeButton);
         settingsButton.onClick.AddListener(SettingsButton);
+   
     }
-    private void Update()
+    private void Update() //if a press the esc button, it will appear my pause panel
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             //Pause();
-            if(pause == false)
+            if (pause == false)
             {
                 resumePanel.SetActive(true);
                 pause = true;
-                Time.timeScale = 0f;
-            }else if(pause == true)
+                Time.timeScale = 0f; //the "0" its to stop my time in game.
+            }
+            else if (pause == true)
             {
                 ResumeButton();
             }
         }
     }
-    public void ResumeButton() //es escribir lo mismo pero totalmente lo contrario
+    public void ResumeButton() 
     {
         resumePanel.SetActive(false);
         pause = false;
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; //the time scale helps me to continue the time.
     }
-  
+
     public void RoomButton()
     {
         Time.timeScale = 1f;
@@ -52,9 +60,11 @@ public class PauseUI : MonoBehaviour
     public void SettingsButton()
     {
         Time.timeScale = 1f;
-        ChangeScenes.Load(ChangeScenes.Scene.SETTINGS);
+        ChangeScenes.Load(ChangeScenes.Scene.MAINMENU);
     }
 
     
+
     
-}
+
+    }

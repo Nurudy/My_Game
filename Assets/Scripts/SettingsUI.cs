@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class SettingsUI : MonoBehaviour
 {
     [SerializeField] private Button backButton;
-    [SerializeField] private Button backGameButton;
+    
 
-    private void Start()
+    private void Start() //this button return to the main menu.
     {
         backButton.onClick.AddListener(BackButton);
-        backGameButton.onClick.AddListener(BackGameButton);
+        
     }
 
     public void BackButton()
@@ -19,8 +19,5 @@ public class SettingsUI : MonoBehaviour
         ChangeScenes.Load(ChangeScenes.Scene.MAINMENU);
     }
 
-    public void BackGameButton()
-    {
-        ChangeScenes.Load(ChangeScenes.Scene.GAME);
-    }
+   
 }

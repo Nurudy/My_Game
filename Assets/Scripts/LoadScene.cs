@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class LoadScene : MonoBehaviour
 {
    
-    public float duration = 5f;
+    private float duration = 3.3f; //The time it takes for the scene to load.
 
     private void Start()
     {
-        Invoke("LoadNextScene", duration);
+        Invoke("LoadNextScene", duration); 
     }
 
     private void LoadNextScene()

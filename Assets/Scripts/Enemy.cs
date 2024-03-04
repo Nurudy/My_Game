@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Enemy : MonoBehaviour
 {
     public Transform player;
-    public float speed = 7f;
-    public float followTime = 3.0f;
-    public float stopTime = 2.0f;
+    private float speed = 6f;
+    private float followTime = 0.5f;
+    private float stopTime = 0.4f;
     private bool following = false;
-    public PLAYER_MOV playerHealth; //esto es para añadir el script del jugador
+    private PLAYER_MOV playerHealth; //This is to access the player script
 
 
-    public int damage = 10;
-    public int ratHealth = 30;
-    public int currentRatHealth;
+    private int damage = 10;
+    private int ratHealth = 10;
+    private int currentRatHealth;
 
-    public void Start()
+    public void Start() //we start with the move bucle and the maxhealth
     {
         StartBucle();
         currentRatHealth = ratHealth;
@@ -24,7 +25,7 @@ public class Enemy : MonoBehaviour
 
     void StartBucle()
     {
-        StartFollowing();
+        StartFollowing(); //the rat followa the player
     }
     void StartFollowing()
     {
@@ -37,11 +38,10 @@ public class Enemy : MonoBehaviour
         following = false;
         Invoke("StartWaiting", stopTime);
     }
-
     void StartWaiting()
     {
-        //reiniciamos el bucle volviendo a iniciar el seguimiento.
-        StartFollowing();
+        
+        StartFollowing(); //We reset the loop by starting the tracking again.
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
         if (player != null && following)
         {
             Vector2 direction = player.position - transform.position;
-            direction.y = 0; //de esta forma mantienen la misma altura
+            direction.y = 0; //same height. PLayer = enemy
 
             transform.Translate(direction.normalized * speed * Time.deltaTime);
         }
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) //If the player loses all their life, the rat disappears.
     {
         currentRatHealth -= damage;
         if (currentRatHealth < 0)
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) //if the rat collisions with the player, it will make damage
     {
         if(collision.gameObject.tag == "player")
         {

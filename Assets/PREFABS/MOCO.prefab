@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8403765933995978629}
   - component: {fileID: -8596788246674073101}
   - component: {fileID: -3676169603993228553}
-  - component: {fileID: -5214292125814842609}
+  - component: {fileID: 5279054990491499830}
   m_Layer: 19
   m_Name: MOCO
   m_TagString: Untagged
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.49127325, y: 0.43050066}
   m_EdgeRadius: 0
---- !u!114 &-5214292125814842609
+--- !u!114 &5279054990491499830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,4 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0161cba63c08cd248b5ebbb54df884a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 28
+  force: 23

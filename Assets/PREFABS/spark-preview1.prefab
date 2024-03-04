@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
+  characterSpriteRenderer: {fileID: 6891810210892687676}
 --- !u!50 &8309281148286117117
 Rigidbody2D:
   serializedVersion: 4

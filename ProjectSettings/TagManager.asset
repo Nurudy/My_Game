@@ -17,6 +17,8 @@ TagManager:
   - WARM
   - BUTTON
   - GM
+  - dark
+  - Level3
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - RATCOLLIDER
   - Postprocessing_Layer
   - MIDDLE
   - TILEMAP
