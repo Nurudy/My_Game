@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.VersionControl;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -18,7 +18,7 @@ public class PLAYER_MOV : MonoBehaviour
 
     //ANIMATION
     public Animator anim;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     private bool isJumping;
     private bool isWalking;
     private bool firstTime = true;
