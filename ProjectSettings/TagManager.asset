@@ -19,6 +19,7 @@ TagManager:
   - GM
   - dark
   - Level3
+  - collectable
   layers:
   - Default
   - TransparentFX

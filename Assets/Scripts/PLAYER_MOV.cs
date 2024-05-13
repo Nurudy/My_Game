@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 
 using UnityEngine;
@@ -10,11 +11,15 @@ public class PLAYER_MOV : MonoBehaviour
 {
 
     //PLAYERMOVE
-    private float speed = 8f;   
+    public float speed = 8f;
+        
+
     [SerializeField]private float horizontalInput;
     private float jump = 22;
     [SerializeField] private Rigidbody2D rig;
     private Vector2 startPos = new Vector2(-8.75f, -6.85f);
+
+    public bool shieldActive = false;
 
     //ANIMATION
     public Animator anim;
@@ -40,12 +45,13 @@ public class PLAYER_MOV : MonoBehaviour
 
     private int maxHealth = 100;
     private int currentHealth;
+    public bool isImmune = false;
 
 
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private ParticleSystem particleDeath;
-    
+    [SerializeField] private CollectibleManager cm;
 
     
 
@@ -58,13 +64,13 @@ public class PLAYER_MOV : MonoBehaviour
         currentHealth = maxHealth; //we start with maxheatlh
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-
     }
 
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         isWalking = horizontalInput != 0; //if the player walks, the horizontalinput will be true
+
 
 
         if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)//my player can jump.
@@ -91,11 +97,14 @@ public class PLAYER_MOV : MonoBehaviour
             firstTime = false; //this line helps me with the respawn. the bool start again with true.
         }
 
+       
+        
     }
 
     private void FixedUpdate()
     {
         rig.velocity = new Vector2(speed * horizontalInput, rig.velocity.y);
+
 
         //PLAYER FLIP
         if (horizontalInput < 0)
@@ -118,20 +127,19 @@ public class PLAYER_MOV : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage; //Subtracting damage
-
-
-        Debug.Log("Healt:" + currentHealth);
-
-        
-
-        if (currentHealth <=0)
+        if (!isImmune) // Si el jugador no es inmune al daño
         {
-            Die();
+            currentHealth -= damage; //Subtracting damage
 
+            Debug.Log("Health: " + currentHealth);
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
 
-       
+
     }
 
     private void Die()
@@ -142,7 +150,23 @@ public class PLAYER_MOV : MonoBehaviour
 
     }
 
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
+    
 
+    //ESCUDO DE PUPU
+    public void ShieldActive(float duration)
+    {
+        shieldActive = true;
+        Invoke("ShieldDesactivated", duration);
+    }
+   
+    public void ShieldDesactivated(float duration)
+    {
+        shieldActive = false;
+    }
 
     IEnumerator Respawn(float duration)
     {
@@ -167,6 +191,15 @@ public class PLAYER_MOV : MonoBehaviour
 
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("collectable"))
+        {
+            Destroy(other.gameObject);
+            cm.mapCount++;
+        }
     }
 
     //SHOW THE CONSOLE HEALTH MESSAGES ON THE SCREEN
