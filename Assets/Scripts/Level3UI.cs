@@ -16,7 +16,7 @@ public class Level3UI : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("player"))
         {
-            ChangeScenes.Load(ChangeScenes.Scene.LEVEL3);     
+            ChangeScenes.Load(ChangeScenes.Scene.LEVEL3TRUE);     
         }
     }
 }

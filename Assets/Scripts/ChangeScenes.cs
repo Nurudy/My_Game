@@ -18,7 +18,8 @@ public class ChangeScenes : MonoBehaviour
         LOADING,
         Video,
         LEVEL2,
-        LEVEL3
+        LEVEL3TRUE,
+        CREDITS
     }
 
     public static void Load(Scene scene) //Because it's static, this function affects all scenes in order to load them.

@@ -19,7 +19,7 @@ public class PLAYER_MOV : MonoBehaviour
     [SerializeField] private Rigidbody2D rig;
     private Vector2 startPos = new Vector2(-8.75f, -6.85f);
 
-    public bool shieldActive = false;
+    //public bool shieldActive;
 
     //ANIMATION
     public Animator anim;
@@ -45,22 +45,23 @@ public class PLAYER_MOV : MonoBehaviour
 
     private int maxHealth = 100;
     private int currentHealth;
-    public bool isImmune = false;
+    //public bool isImmune = false;
 
 
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private ParticleSystem particleDeath;
     [SerializeField] private CollectibleManager cm;
+    private Vector2 checkpointPos;
 
-    
 
     private void Start()
     {
         startPos = transform.position;
         anim = GetComponent<Animator>();
         rig = GetComponent<Rigidbody2D>();
-        
+        checkpointPos = startPos;
+
         currentHealth = maxHealth; //we start with maxheatlh
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -127,25 +128,27 @@ public class PLAYER_MOV : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!isImmune) // Si el jugador no es inmune al daño
+        /*if (!isImmune) // Si el jugador no es inmune al daño
         {
-            currentHealth -= damage; //Subtracting damage
+            
+        }*/
 
-            Debug.Log("Health: " + currentHealth);
+        currentHealth -= damage; //Subtracting damage
 
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
+        Debug.Log("Health: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
         }
 
 
     }
 
-    private void Die()
+    public void Die()
     {
         
-        StartCoroutine(Respawn(1f)); //wait one second before respawn
+        StartCoroutine(Respawn(0f)); //wait one second before respawn
         particleDeath.Play();
 
     }
@@ -157,26 +160,31 @@ public class PLAYER_MOV : MonoBehaviour
     
 
     //ESCUDO DE PUPU
-    public void ShieldActive(float duration)
+    /*public void ShieldActive(float duration)
     {
         shieldActive = true;
-        Invoke("ShieldDesactivated", duration);
+        Invoke(nameof(ShieldDesactivated), duration); //el nameof es como una palabra clave de c++, evita problemas de cadena
     }
    
     public void ShieldDesactivated(float duration)
     {
         shieldActive = false;
-    }
+    }*/
 
     IEnumerator Respawn(float duration)
     {
 
         yield return new WaitForSeconds(duration);
-        transform.position = startPos;
+        transform.position = checkpointPos;
         currentHealth = maxHealth;
         firstTime = true;
         rig.velocity = Vector2.zero;
+    }
 
+    public void SetCheckpoint(Vector2 newCheckpoint)
+    {
+        checkpointPos = newCheckpoint;
+        Debug.Log("Checkpoint set to: " + checkpointPos);
     }
 
 
@@ -200,6 +208,27 @@ public class PLAYER_MOV : MonoBehaviour
             Destroy(other.gameObject);
             cm.mapCount++;
         }
+
+        if (other.gameObject.CompareTag("cherry"))
+        {
+            Destroy(other.gameObject);
+            IncreaseHealth(20); // Increment health by 20 points
+        }
+
+        
+
+
+    }
+
+    private void IncreaseHealth(int amount)
+    {
+        currentHealth += amount;
+        Debug.Log("Health: " + currentHealth);
+        // Update UI if necessary
+        if (debugText != null)
+        {
+            debugText.text = "Health: " + currentHealth;
+        }
     }
 
     //SHOW THE CONSOLE HEALTH MESSAGES ON THE SCREEN
@@ -217,7 +246,7 @@ public class PLAYER_MOV : MonoBehaviour
     void HandleLog(string logString, string stackTrace, LogType type)
     {
         
-        if (logString.Equals("Healt:" + currentHealth))
+        if (logString.Equals("Health:" + currentHealth))
         {
             
             debugText.text = logString + "\n";//Update the TextMeshProUGUI component's text with the specific message.

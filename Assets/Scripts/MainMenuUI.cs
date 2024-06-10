@@ -13,6 +13,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button creditsButton;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class MainMenuUI : MonoBehaviour
         controlsButton.onClick.AddListener(ControlsButton);
         settingsButton.onClick.AddListener(SettingsButton);
         newGameButton.onClick.AddListener(NewGameButton);
+        creditsButton.onClick.AddListener(CreditsButton);
         quitButton.onClick.AddListener(Application.Quit); //this one helps me to exit the game.
     }
 
@@ -28,7 +30,12 @@ public class MainMenuUI : MonoBehaviour
         ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM);
     }
 
-   public void ControlsButton()
+    public void CreditsButton()
+    {
+        ChangeScenes.Load(ChangeScenes.Scene.CREDITS);
+    }
+
+    public void ControlsButton()
     {
         ChangeScenes.Load(ChangeScenes.Scene.CONTROLS);
     }

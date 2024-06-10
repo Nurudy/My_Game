@@ -29,10 +29,12 @@ public class CATS : MonoBehaviour
     [SerializeField] private Canvas[] speechCat;
     [SerializeField] private AudioSource audioSource; // Referencia al AudioSource que reproduce el maullido
     [SerializeField] private AudioClip[] mewing;
+    private int currentSpeechIndex = 0;
+    [SerializeField] private Button nextButton;
 
 
 
-    
+
 
     private void Start() //the "Start", starts with the cat's speech. It activates the canvas.
     {
@@ -43,7 +45,9 @@ public class CATS : MonoBehaviour
         {
             canvas.gameObject.SetActive(false);
         }
-        StartCoroutine(DelayFeedback()); //this is the time to appears.
+        nextButton.gameObject.SetActive(false); // Oculta el botón al inicio
+        nextButton.onClick.AddListener(AdvanceDialogue); // Agrega la función de avanzar diálogo
+        StartCoroutine(DelayFeedback());
 
     }
 
@@ -114,23 +118,35 @@ public class CATS : MonoBehaviour
     private IEnumerator DelayFeedback()
     {
         yield return new WaitForSeconds(0.6f); //it waits 0.6s before start
-
-        for (int i = 0; i < speechCat.Length; i++)
+        ShowDialogue();
+    }
+    private void ShowDialogue()
+    {
+        if (currentSpeechIndex < speechCat.Length)
         {
-            
-            speechCat[i].gameObject.SetActive(true); //activates the canvas
+            speechCat[currentSpeechIndex].gameObject.SetActive(true); // Activa el canvas actual
 
-            
-            if (i < mewing.Length && mewing[i] != null) //makes the cat sound at the same time
+            if (currentSpeechIndex < mewing.Length && mewing[currentSpeechIndex] != null) // Hace que el gato suene al mismo tiempo
             {
-                audioSource.PlayOneShot(mewing[i]);
+                audioSource.PlayOneShot(mewing[currentSpeechIndex]);
             }
 
-            
-            yield return new WaitForSeconds(3f); //waits 2 seconds before appears the next canvas
+            nextButton.gameObject.SetActive(true); // enseña el botón de siguiente
+        }
+    }
 
-            
-            speechCat[i].gameObject.SetActive(false); //disable the canvas
+    private void AdvanceDialogue()
+    {
+        if (currentSpeechIndex < speechCat.Length)
+        {
+            speechCat[currentSpeechIndex].gameObject.SetActive(false); // Desactiva el canvas actual
+            nextButton.gameObject.SetActive(false); // Oculta el botón de siguiente
+            currentSpeechIndex++;
+
+            if (currentSpeechIndex < speechCat.Length)
+            {
+                ShowDialogue();
+            }
         }
     }
 
