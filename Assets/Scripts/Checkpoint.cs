@@ -10,14 +10,14 @@ public class Checkpoint : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
 
-    private void Start()
+    private void Start() 
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         DeactivateCheckpoint();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) //si el jugador pasa por en frente el check se activa 
     {
         if (other.CompareTag("player"))
         {
@@ -31,18 +31,18 @@ public class Checkpoint : MonoBehaviour
     }
 
 
-    public void ActivateCheckpoint()
+    public void ActivateCheckpoint() //y hace ruidito
     {
         spriteRenderer.sprite = activeSprite;
         PlayActivationSound();
     }
 
-    public void DeactivateCheckpoint()
+    public void DeactivateCheckpoint() //aqui muestra que pasa de desactivado(dibujo) a activado
     {
         spriteRenderer.sprite = inactiveSprite;
     }
 
-    private void PlayActivationSound()
+    private void PlayActivationSound() //el sonidito al activarse o pasar.
     {
         if (audioSource != null && activationSound != null)
         {

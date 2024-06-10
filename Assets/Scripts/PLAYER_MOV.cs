@@ -38,7 +38,7 @@ public class PLAYER_MOV : MonoBehaviour
     [SerializeField]private AudioClip jumpSound;
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private TextMeshProUGUI debugText; // Referencia al componente TextMeshProUGUI en el que mostrarás los mensajes de depuración
+    [SerializeField] private TextMeshProUGUI debugText; // Referencia al componente TextMeshProUGUI
 
 
     //HEALTH AND DAMAGE

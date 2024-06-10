@@ -19,25 +19,25 @@ public class GAMEMANAGER : MonoBehaviour
             if (currentSceneName == "GAME")
             {
                 PlayerPrefs.SetInt("Level1Completed", 1); // Guarda que el nivel 1 está completado
-                PlayerPrefs.SetInt("Level2Unlocked", 1); // Desbloquea el nivel 2
-                ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM); // Cambia a la siguiente escena
+                PlayerPrefs.SetInt("Level2Unlocked", 1); // y desbloquea el nivel 2
+                ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM); // Cambia a la siguiente escena directamente
 
             }
             else if (currentSceneName == "LEVEL2")
             {
-                PlayerPrefs.SetInt("Level2Completed", 1); // Guarda que el nivel 2 está completado
-                PlayerPrefs.SetInt("Level3Unlocked", 1); // Desbloquea el nivel 3
-                ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM); // Cambia a la siguiente escena
+                PlayerPrefs.SetInt("Level2Completed", 1);
+                PlayerPrefs.SetInt("Level3Unlocked", 1); 
+                ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM); 
             }
             else if (currentSceneName == "LEVEL3TRUE")
             {
-                PlayerPrefs.SetInt("Level3Completed", 1); // Guarda que el nivel 3 está completado
-                                                          // Aquí puedes realizar otras acciones si es necesario
-                ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM); // Cambia a la siguiente escena
+                PlayerPrefs.SetInt("Level3Completed", 1); 
+                                                          
+                ChangeScenes.Load(ChangeScenes.Scene.LEVELROOM); 
             }
 
-            // Asegura que todos los cambios en PlayerPrefs se guarden
-            PlayerPrefs.Save();
+            
+            PlayerPrefs.Save(); //esto asegura el guardado
 
 
         }
@@ -48,9 +48,9 @@ public class GAMEMANAGER : MonoBehaviour
     public static GAMEMANAGER Instance { get; private set; }
     private Vector2 checkpointPos;
 
-    private void Awake()
+    private void Awake() //(he probado de hacer un singleton)
     {
-        if (Instance == null)
+        if (Instance == null) //asegura que el objeto no se destruya a no ser que cambie de escena o la empiece de nuevo.
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -63,7 +63,7 @@ public class GAMEMANAGER : MonoBehaviour
 
     public void SetCheckpoint(Vector2 newCheckpoint)
     {
-        checkpointPos = newCheckpoint;
+        checkpointPos = newCheckpoint; //actuakliza el check
     }
 
     public Vector2 GetCheckpoint()

@@ -19,24 +19,24 @@ public class DialogueNpc : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (dialoguePanel.activeInHierarchy)
+            if (dialoguePanel.activeInHierarchy) //esto es para activar la cadena en la que esta el dialoguePanel.
             {
                 ZeroText();
             }
             else
             {
-                dialoguePanel.SetActive(true);
+                dialoguePanel.SetActive(true); //si se activa el panel del dialogo, a su vez se activa la funcion de las letras
                 StartCoroutine(Typing());
             }
         }
 
-        if(dialogueText.text == dialogue[index])
+        if(dialogueText.text == dialogue[index]) //llamo al boton
         {
             contButton.SetActive(true);
         }
     }
 
-    public void ZeroText()
+    public void ZeroText() //activo el array y empieza siempre desde cero
     {
         dialogueText.text = "";
         index = 0;
@@ -65,7 +65,7 @@ public class DialogueNpc : MonoBehaviour
         }
         else
         {
-            ZeroText() ;
+            ZeroText() ;  
         }
     }
 

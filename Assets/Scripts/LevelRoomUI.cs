@@ -21,10 +21,10 @@ public class LevelRoomUI : MonoBehaviour
 
         oneButton.interactable = true;
 
-        // Cargar el progreso de los niveles usando PlayerPrefs
+        // cargar el rpoceso de los niveles
         bool level1Completed = PlayerPrefs.GetInt("Level1Completed", 0) == 1;
         Debug.Log("Level 1 Completed: " + level1Completed);
-        level2.interactable = level1Completed; // El nivel 2 es interactivo solo si el nivel 1 está completado
+        level2.interactable = level1Completed; // nivel 2 disponible si nivel 1 esta pasado
 
         bool level2Unlocked = PlayerPrefs.GetInt("Level2Unlocked", 0) == 1;
         Debug.Log("Level 2 Unlocked: " + level2Unlocked);
@@ -33,7 +33,7 @@ public class LevelRoomUI : MonoBehaviour
 
     public void OneButton()
     {
-        ChangeScenes.Load(ChangeScenes.Scene.LOADING); // Asegúrate de que esto cargue el nivel 1
+        ChangeScenes.Load(ChangeScenes.Scene.LOADING); //el nivel uno si o si se carga 
     }
 
     public void BackButton()
