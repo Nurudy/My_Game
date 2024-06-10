@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
+
 
 public class CollectibleManager : MonoBehaviour
 {
@@ -15,28 +15,32 @@ public class CollectibleManager : MonoBehaviour
     [SerializeField]bool run = false;
     //[SerializeField] bool jumphigh = false;
 
-
+    public Image shieldImage;
 
     private void Start()
     {
-        //shieldImage.gameObject.SetActive(false);
+        shieldImage.gameObject.SetActive(false);
     }
     private void Update()
     {
         mapText.text = mapCount.ToString();
 
-        if(mapCount >= 6)
+        if (mapCount >= 6)
         {
-            if(Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 run = true;
                 player.SetSpeed(16);
-            }else if (Input.GetKeyUp(KeyCode.LeftShift))
+                StartCoroutine(ShowShieldImage());
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 run = false;
                 player.SetSpeed(8);
             }
         }
+
+
 
         /*if(mapCount >= 6)
         {
@@ -54,6 +58,13 @@ public class CollectibleManager : MonoBehaviour
             shield.ShieldActive(5.0f); // El escudo estará activo por 5 segundos
             currentHealth.isImmune = true; // El jugador será inmune al daño mientras el escudo esté activo
         }*/
+    }
+
+    private IEnumerator ShowShieldImage() //cuando desbloquea los 6 pergaminos muestra la imagen
+    {
+        shieldImage.gameObject.SetActive(true); 
+        yield return new WaitForSeconds(5);
+        shieldImage.gameObject.SetActive(false); 
     }
 
     /*private void ActivateShield(float duration)
